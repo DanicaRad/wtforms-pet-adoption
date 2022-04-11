@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ pet.name }} details{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h2>Pet Info</h2>
+            {% if pet.photo_url %}
+            <img src="{{ pet.photo_url }}"
+                alt="{{ pet.species }}"
+                class="img-fluid" border="0">
+            {% else %}
+            <img src="https://i.ibb.co/vQYBDcs/priscilla-du-preez-qtkp-Ox-Cpl0-Y-unsplash.jpg"
+                alt="{{ pet.species }}"
+                class="img-fluid" border="0">
+            {% endif %}
+            <ul>
+                <li>
+                    Name: {{ pet.name }}
+                </li>
+                <li>
+                    Species: {{ pet.species }}
+                </li>
+                <li>
+                    Age: {{ pet.age }}
+                </li>
+                <li>
+                    Notes: {{ pet.notes }}
+                </li>
+
+            {% if pet.available == True %}
+                <li><b>{{ pet.name }} is available to adopt!</b></li>
+                    {% else %}
+                <li>{{ pet.name }} is not available :-/</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="col">
+            <h2>Edit Pet Details</h2>
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                
+                {% for field in form
+                    if field.widget.input_type != 'hidden' %}
+            
+               <div class="form-group">
+                    {{ field.label }}
+                    <br>
+                    {{ field }}
+               
+                 {% for error in field.errors %}
+                   {{ error }}
+                 {% endfor %}
+               </div>
+            
+             {% endfor %}
+             <button class="btn btn-small btn-outline-success" type="submit">Update Pet</button>
+            
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Pets for Adoption List{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for pet in pets %}
+        <div class="col-4">
+            {% if pet.photo_url %}
+            <img src="{{ pet.photo_url }}"
+                alt="{{ pet.species }}"
+                class="img-fluid" border="0">
+            {% else %}
+            <img src="https://i.ibb.co/vQYBDcs/priscilla-du-preez-qtkp-Ox-Cpl0-Y-unsplash.jpg"
+                alt="{{ pet.species }}"
+                class="img-fluid" border="0">
+            {% endif %}
+            {% if pet.available == True %}
+                <p><a href="/{{ pet.id }}">{{ pet.name }}</a> is <b>available</b>!</p>
+                    {% else %}
+                    <p><a href="/{{ pet.id}}">{{ pet.name }}</a> is not available.</p>
+                {% endif %}
+
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-auto">
+            <a href="/add" class="btn btn-success btn-small">Add a pet</a>
+        </div>
+    </div>
+</div>
+
+<!-- "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" -->
+
+{% endblock %}

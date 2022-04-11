@@ -1,0 +1,8 @@
+ul, li {
+    list-style: none;
+    padding-left: 0px;
+}
+
+.form-group {
+    margin-top: 10px;
+}
